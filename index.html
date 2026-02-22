@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Analyzer</title>
+    <style>
+        body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #571e72, #752a98, #ff41c6, #ff792b);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+        .container {
+    background: rgba(0,0,0,0.4);
+    border-radius: 25px;
+    padding: 30px;
+    width: 500px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    color: rgb(255, 255, 255);
+
+    text-align: center;
+    border: 2px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+  }
+
+  h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #00f2619d, #05c4e6);
+   /* -webkit-background-clip: text;*/
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  input, button {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  input {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  input::placeholder { color: rgba(255,255,255,0.6); }
+
+  button {
+    background: linear-gradient(90deg, #ff416c, #ff4b2b);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 1px;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #ff416db2, 0 0 40px #fbff2b;
+  }
+
+  .result {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+  }
+
+  .column {
+    padding: 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    transition: 0.4s;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.6);
+    animation: float 4s ease-in-out infinite;
+    color: white;
+    font-size: 18px;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+  }
+
+    </style>
+</head>
+<body>
+    <div class="container">String Project
+
+<input type="text" name="" id="inputName"placeholder="Enter Your Name">
+<button onclick="checkName()">Check String</button>
+<div class="result" id="resultBox">
+    <p><b>Name:</b><span id="rName"></span></p>
+    <p><b>First Name:</b><span id="fName"></span></p>
+     <p><b> last Name:</b><span id="lName"></span></p>
+      <p><b>UpperCase:</b><span id="rUpper"></span></p>
+       <p><b>Lowercase:</b><span id="rlower"></span></p>
+</div>
+</div>
+
+<script>
+function checkName() {
+    let name = document.getElementById("inputName").value.trim();
+    if (name === "") {
+        alert("Please enter a name");
+        return;
+    }
+
+    let firstLetter = name.charAt(0);
+    let lastLetter = name.charAt(name.length - 1);
+    let totalLetters = name.length;
+    let reverse = name.split("").reverse().join("");
+    let middleLetter = name.charAt(Math.floor(name.length / 2));
+    let isCapital = firstLetter === firstLetter.toUpperCase() ? "Yes" : "No";
+    let evenOdd = totalLetters % 2 === 0 ? "Even Length" : "Odd Length";
+
+    document.getElementById("rName").innerText = name;
+    document.getElementById("fName").innerText = firstLetter;
+    document.getElementById("lName").innerText = lastLetter;
+    document.getElementById("rUpper").innerText = name.toUpperCase();
+    document.getElementById("rlower").innerText = name.toLowerCase();
+
+   
+   document.getElementById("resultBox").innerHTML += `
+        <p><b>Total Letters:</b> ${totalLetters}</p>
+        <p><b>Middle Letter:</b> ${middleLetter}</p>
+        <p><b>Reverse:</b> ${reverse}</p>
+        <p><b>First Letter Capital?:</b> ${isCapital}</p>
+        <p><b>Length Type:</b> ${evenOdd}</p>
+    `;
+}
+</script>
+
+</body>
+</html>
